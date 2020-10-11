@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>¿Cuantas Duff tomó Homero?</title>
+    </head>
+    <body>
+
+        <style>
+
+            body {
+                background-color: yellow;
+                text-align: center;
+            }
+
+            h1 {
+                color: red;
+                font-size: 50px;
+                font-family: monospace;
+            }
+
+            p, label {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            span {
+                color: red;
+            }
+
+            div {
+                line-height: 60px;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            img {
+                width: 60px;
+                position: absolute;
+                top: 300px;
+            }
+
+            #homero {
+                width: 100px;
+                position: absolute;
+                top: 2px;
+                left: 100px;
+            }
+
+            input {
+                color: #0a0a0a;
+                font-family: monospace;
+                font-weight: bold;
+            }
+
+        </style>
+
+        <audio id="audio">
+            <source src="" type="audio/mpeg">
+        </audio>
+
+        <h1>Calculador de Duff</h1>
+        
+        <p>Homero empezó a tomar cerveza a los 17 años y podemos decir con seguridad,<br>que desde el comienzo habrá bebido al menos 6 <span>Duff</span> por día.<br>¿Cuantas <span>Duff</span> va a tomar en su vida?</p>
+        
+        <form id="calculator-form">
+            <label>
+                Edad de Homero
+                <input id="edad" type="number" name="age">
+            </label>
+            <button type="submit">Calcular</button>
+            <div id="calculator-results"></div><br>
+        </form>
+
+        <img src="image.png" alt="Foto de una lata de cerveza Duff">
+
+        <img id="homero" src="image2.png" alt="Foto de la cara de Homero">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <script>
+
+        	var $results = $("#calculator-results")
+
+        	var calcDuff = function(years) {
+                return (years - 17) * 6 * 365;
+            };
+
+         
+			function mostrarTexto(texto, estilo) {
+            	$results.fadeIn(1000);
+            	$results.text(texto)
+            	$results.css(estilo)
+            }
+
+            function reproducirAudio(audioSource) {
+                audio.src = audioSource
+                audio.play()
+            }
+            
+            $("#calculator-form").on("submit", function(event) {
+            	event.preventDefault();
+                $edad = $("#edad");
+                edad = $edad.val() 
+                $results.hide();
+                if(edad < 17) {
+                	mostrarTexto("Recordá que Homero comenzó a beber a los 17 años", {"color": "red", "font-family": "cursive"})
+                    reproducirAudio("audio.mp3")
+                  
+                }else if(edad == 17) {
+                	mostrarTexto("Homero recién comenzó a beber. Por ahora tomó 0 Duff ", {"color": "green", "font-family": "fantasy"})
+                    reproducirAudio("audio3.mp3")
+                   
+                }else {
+                	var cuenta = "Homero ya tomó " + calcDuff(edad) + " Duff" 
+                    mostrarTexto(cuenta, {"color": "blue", "font-family": "monospace"})
+                    reproducirAudio("audio2.mp3")
+                }
+            });
+        
+        </script>
+    </body>
+</html>
